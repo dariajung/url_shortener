@@ -16,3 +16,8 @@ To get started:
 ```python app.py```
 
 Play around!
+
+To Dos:
+    - Create config file for globals
+    - Set up a prefix for Redis keys
+    
