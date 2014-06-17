@@ -19,15 +19,18 @@ def home():
 @app.route('/shorten', methods=['POST'])
 def return_shortened():
     url_to_parse = request.form.get('url_to_parse')
+
     parsed = urlShortener.shorten(url_to_parse)
-    print parsed['shorturl']
 
     return parsed['shorturl']
 
 @app.route('/<path:slug>')
 def fallback(slug):
     try:
-        original_url=urlShortener.redis.get(slug)
+        print slug
+        original_url = urlShortener.redis.get(slug)
+
+        print original_url
 
     except:
         return None
