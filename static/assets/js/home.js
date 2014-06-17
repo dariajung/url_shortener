@@ -1,0 +1,1 @@
+var shortenerApp = angular.module('shortenerApp', []);
