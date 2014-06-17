@@ -3,6 +3,7 @@ import base64
 import md5
 import math
 import os
+import config
 
 BASE = 62
 
@@ -73,12 +74,12 @@ class SimpleUrlShortener:
         # set santized code + Redis in redis as key, and the url as the value
 
         try:
-            self.redis.set(sanitized, url)
+            self.redis.set(config.PREFIX + sanitized, url)
             return {   
                         'success': True,
                         'url': url,
                         'code': sanitized,
-                        'shorturl': 'http://localhost:5000/' + sanitized
+                        'shorturl': config.ROOT_URL + sanitized
                     }
         except:
             return { 'success': False }
@@ -86,7 +87,7 @@ class SimpleUrlShortener:
     def lookup(self, code):
 
         try:
-            self.redis.get(code)
+            self.redis.get(config.PREFIX + code)
 
         except:
             return None

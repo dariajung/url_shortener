@@ -2,6 +2,7 @@
 
 from flask import (Flask, Response, request, render_template, redirect, url_for)
 from shorten import SimpleUrlShortener
+import config
 import redis
 
 from urlparse import urlparse
@@ -28,7 +29,7 @@ def return_shortened():
 def fallback(slug):
     try:
         print slug
-        original_url = urlShortener.redis.get(slug)
+        original_url = urlShortener.lookup(slug)
 
         print original_url
 
