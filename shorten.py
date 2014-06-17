@@ -10,7 +10,7 @@ UPPERCASE_OFFSET = 55
 LOWERCASE_OFFSET = 61
 DIGIT_OFFSET = 48
 
-# PREFIX = os.getenv("PREFIX", "shortend:") 
+PREFIX = os.getenv("PREFIX", "shortend:") 
 
 class SimpleUrlShortener:
 
@@ -76,7 +76,7 @@ class SimpleUrlShortener:
 
         try:
             print "santiized " + sanitized
-            self.redis.set(sanitized, url)
+            self.redis.set(PREFIX + sanitized, url)
             return {   
                         'success': True,
                         'url': url,
@@ -90,20 +90,7 @@ class SimpleUrlShortener:
 
         try:
             print "trying"
-            self.redis.get(code)
+            self.redis.get(PREFIX + code)
 
         except:
             return None
-
-# if __name__ == "__main__":
-#     urlShortener = SimpleUrlShortener()
-#     parsed = urlShortener.shorten("http://dariajung.com")
-#     short_url = parsed['shorturl']
-#     code = parsed['code']
-
-#     print "code " + code
-
-#     print urlShortener.redis.get(code)
-
-#     print urlShortener.lookup(code)
-
