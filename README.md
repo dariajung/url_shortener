@@ -18,6 +18,6 @@ To get started:
 Play around!
 
 To Dos:
-    - Create config file for globals
-    - Set up a prefix for Redis keys
+* Create config file for globals
+* Set up a prefix for Redis keys
     
