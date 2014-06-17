@@ -10,12 +10,12 @@ UPPERCASE_OFFSET = 55
 LOWERCASE_OFFSET = 61
 DIGIT_OFFSET = 48
 
-PREFIX = os.getenv("PREFIX", "shortend:") 
+# PREFIX = os.getenv("PREFIX", "shortend:") 
 
 class SimpleUrlShortener:
 
     def __init__(self):
-        self.redis = redis.StrictRedis(host='localhost', port=5000, db=0)
+        self.redis = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def get_ord(self, char):
 
@@ -75,12 +75,13 @@ class SimpleUrlShortener:
         # set santized code + Redis in redis as key, and the url as the value
 
         try:
-            self.redis.set(PREFIX + sanitized, url)
+            print "santiized " + sanitized
+            self.redis.set(sanitized, url)
             return {   
                         'success': True,
                         'url': url,
                         'code': sanitized,
-                        'shorturl': 'localhost:5000/' + sanitized
+                        'shorturl': 'http://localhost:5000/' + sanitized
                     }
         except:
             return { 'success': False }
@@ -88,8 +89,21 @@ class SimpleUrlShortener:
     def lookup(self, code):
 
         try:
-            self.redis.get(PREFIX + code)
+            print "trying"
+            self.redis.get(code)
 
         except:
             return None
+
+# if __name__ == "__main__":
+#     urlShortener = SimpleUrlShortener()
+#     parsed = urlShortener.shorten("http://dariajung.com")
+#     short_url = parsed['shorturl']
+#     code = parsed['code']
+
+#     print "code " + code
+
+#     print urlShortener.redis.get(code)
+
+#     print urlShortener.lookup(code)
 
