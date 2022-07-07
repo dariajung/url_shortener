@@ -36,7 +36,7 @@ python-dateutil==2.2
 pytz==2014.2
 rauth==0.7.0
 redis==2.9.1
-requests==2.2.1
+requests==2.20.0
 requests-oauthlib==0.4.0
 simplejson==3.4.0
 six==1.6.1
